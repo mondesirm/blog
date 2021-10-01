@@ -1,0 +1,47 @@
+version: "3.7"
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - web
+    env_file:
+      - ./.env
+
+  db:
+    image: mysql:5.6
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      SERVICE_NAME: mysql
+    networks:
+      - web
+      - back
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    depends_on:
+      - db
+    ports:
+      - 8888:80
+      - 8889:443
+    environment:
+      - PHP_UPLOAD_MAX_FILESIZE=100MB
+      - PMA_HOST=db
+    networks:
+      - back
+
+networks:
+  web:
+    driver: bridge
+  back:
+    driver: bridge

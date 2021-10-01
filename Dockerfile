@@ -12,15 +12,15 @@ RUN apt-get update && apt-get install -y \
     libcurl3-openssl-dev \
     zlib1g-dev \
     libmemcached-dev \
-    && pecl install memcached-2.2.0 \
-    && docker-php-ext-enable memcached
+    && pecl install memcached-2.2.0 xdebug \
+    && docker-php-ext-enable memcached xdebug
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* \
 && sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' /etc/apache2/sites-available/*.conf
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install pdo_mysql xdebug
 
 # Set working directory
 WORKDIR /var/www/html

@@ -12,3 +12,6 @@
 */
 
 $app->get('/', ListingController::class);
+
+$app->get('/time', TimeController::class);
+

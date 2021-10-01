@@ -22,6 +22,8 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* \
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql
 
+RUN a2enmod rewrite
+
 # Set working directory
 WORKDIR /var/www/html
 

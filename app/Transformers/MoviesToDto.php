@@ -10,11 +10,13 @@ class MoviesToDto
     {
         switch ($movie->type) {
             case 'Comedy':
-                return ['id' => $movie->id, 'title' => $movie->name, 'category' => 'Comedy / Drama',];
+                return ['id' => $movie->id, 'name' => $movie->name, 'type' => 'Comedy / Drama'];
+
             case 'Mystery/Crime':
-                return ['id' => $movie->id, 'title' => $movie->name, 'category' => 'Mystery / Crime',];
+                return ['id' => $movie->id, 'name' => $movie->name, 'type' => 'Mystery / Crime'];
+
             default:
-                return ['id' => $movie->id, 'title' => $movie->name, 'category' => $movie->type,];
+                return ['id' => $movie->id, 'name' => $movie->name, 'type' => $movie->type];
         }
     }
 }

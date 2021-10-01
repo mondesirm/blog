@@ -1,4 +1,4 @@
-FROM php:5.6-apache
+FROM php:8-apache
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -12,8 +12,8 @@ RUN apt-get update && apt-get install -y \
     libcurl3-openssl-dev \
     zlib1g-dev \
     libmemcached-dev \
-    && pecl install memcached-2.2.0 xdebug \
-    && docker-php-ext-enable memcached xdebug
+    && pecl install memcached-3.1.5 \
+    && docker-php-ext-enable memcached
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* \
